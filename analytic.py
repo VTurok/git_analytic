@@ -195,7 +195,7 @@ class TopContributors(BaseAnalyticParamClass):
         :param lst_data: dict
         :return: list of strings
         """
-        lst_logins = [i["login"] for i in lst_data]
+        lst_logins = [i.get("login") for i in lst_data]
         return lst_logins
 
     def _get_commits_qty_for_one_contributor(self, name, dict_contributors):
@@ -258,7 +258,7 @@ class PullsAnalytics(BaseAnalyticParamClass):
         fields = ["created", "updated", "closed", "merged"]
         pull = namedtuple("Pull", fields)
         return pull(
-            data["created_at"], data["updated_at"], data["closed_at"], data["merged_at"]
+            data.get("created_at"), data.get("updated_at"), data.get("closed_at"), data.get("merged_at")
         )
 
     def _pulls_classifier(self, old_border):
